@@ -1,0 +1,131 @@
+Title: Maine Indigency Calculator
+Author: Christopher Walkley
+Before:<link rel="stylesheet" type="text/css" href="https://suffolklitlab.org/howto/qna/style/style.css">
+<div id="icon" style="background-size: 110px 99px;background-image: url('https://suffolklitlab.org/howto/qna/images/maxheadroom.gif');"></div>
+<h2 style="text-align:center;">Maine Indigency Calculator</h2>
+<p><b>This is a <a href="http://www.codingthelaw.org/">class project</a>. You should not rely on it as a source of legal information. It is likely incomplete.</b></p>
+<p>Answer the following questions to see if someone qualifies for appointment of counsel.</p>
+
+Q(1):  Hello!  If you are wondering if your client is eligible for state appointed counsel, I can provide you an answer in about 5 minutes!  To start, is your client in need of state appointed legal representation?
+A:  Yes.
+	Q(1.1):GOTO:2
+A:  No. 
+	Q(1.2):GOTO:End
+
+Q(2):  Is your client involved in a civil case, such as divorce, eviction, protection from abuse, small claims, or foreclosures?
+A:  Yes.
+	Q(2.1):GOTO:Civil
+A:  No - my client is involved in a criminal, juvenile, child protective, involuntary commitment, or emancipation case
+	Q(2.2):GOTO:3
+ 
+
+Q(3):  Ok, your client maybe eligible for a state appointed attorney.  Let's gather some information about your client to see if they are eligible.  <b> First, </b> how many members are in the client's family unit (e.g. if the client lives alone select "1" and if the client lives with 2 other people select "3")?
+A: 1
+	Q(3.1): <b> Second </b> what is the most serious charge facing the client?
+	A: Class A felony
+		Q(3.1.1): <b> Third, </b> what are the total cash assets of the client and members of the family unit (including any bail paid by the client)?
+		A:  Greater than $4,000
+			Q(3.1.1.1):GOTO:EndCash
+		A:  $4,000
+			Q(3.1.1.2):GOTO:EndCash
+		A:  Less than $4,000
+			Q(3.1.1.3):GOTO:4
+		A:  I'm not sure - what are considered <i> "cash assets" </i>
+			Q(3.1.1.4): Good question!  Cash assets include: cash on hand, money in savings, checking, IRA, or other readily accessible accounts; stocks of bonds that can be sold; and <b> cash bail paid by the client </b>
+			A:  Got it, click <b> HERE</b> to answer the previous question.
+				Q(3.1.1.4.1):GOTO:3.1
+	A: Class B felony
+		Q(3.1.2): <b> Third, </b> what are the total cash assets of the client and members of the family unit (including any bail paid by the client)?
+		A:  Greater than $3,000
+			Q(3.1.2.1):GOTO:EndCash
+		A:  $3,000
+			Q(3.1.2.2):GOTO:EndCash
+		A:  Less than $3,000
+			Q(3.1.2.3):GOTO:4
+		A:  I'm not sure - what are considered <i> "cash assets" </i>
+			Q(3.1.2.4): Good question!  Cash assets include: cash on hand, money in savings, checking, IRA, or other readily accessible accounts; stocks of bonds that can be sold; and <b> cash bail paid by the client </b>
+			A:  Got it, click <b> HERE</b> to answer the previous question.
+				Q(3.1.2.4.1):GOTO:3.1
+	A: Class C felony
+		Q(3.1.3): <b> Third, </b> what are the total cash assets of the client and members of the family unit (including any bail paid by the client)?
+		A:  Greater than $2,000
+			Q(3.1.3.1):GOTO:EndCash
+		A:  $2,000
+			Q(3.1.3.2):GOTO:EndCash
+		A:  Less than $2,000
+			Q(3.1.3.3):GOTO:4
+		A:  I'm not sure - what are considered <i> "cash assets" </i>
+			Q(3.1.3.4): Good question!  Cash assets include: cash on hand, money in savings, checking, IRA, or other readily accessible accounts; stocks of bonds that can be sold; and <b> cash bail paid by the client </b>
+			A:  Got it, click <b> HERE</b> to answer the previous question.
+				Q(3.1.3.4.1):GOTO:3.1
+	A: Class D or E felony
+		Q(3.1.4): <b> Third, </b> what are the total cash assets of the client and members of the family unit (including any bail paid by the client)?
+		A:  Greater than $1,000
+			Q(3.1.4.1):GOTO:EndCash
+		A:  $1,000
+			Q(3.1.4.2):GOTO:EndCash
+		A:  Less than $1,000
+			Q(3.1.4.3):GOTO:4
+		A:  I'm not sure - what are considered <i> "cash assets" </i>
+			Q(3.1.4.4): Good question!  Cash assets include: cash on hand, money in savings, checking, IRA, or other readily accessible accounts; stocks of bonds that can be sold; and <b> cash bail paid by the client </b>
+			A:  Got it, click <b> HERE</b> to answer the previous question.
+				Q(3.1.4.4.1):GOTO:3.1
+	A: My client is in a Protective Custody case
+		Q(3.1.5): <b> Third, </b> what are the total cash assets of the client and members of the family unit (including any bail paid by the client)?
+		A:  Greater than $2,500
+			Q(3.1.5.1):GOTO:EndCash
+		A:  $2,500
+			Q(3.1.5.2):GOTO:EndCash
+		A:  Less than $2,500
+			Q(3.1.5.3):GOTO:4
+		A:  I'm not sure - what are considered <i> "cash assets" </i>
+			Q(3.1.5.4): Good question!  Cash assets include: cash on hand, money in savings, checking, IRA, or other readily accessible accounts; stocks of bonds that can be sold; and <b> cash bail paid by the client </b>
+			A:  Got it, click <b> HERE</b> to answer the previous question.
+				Q(3.1.5.4.1):GOTO:3.1
+	A:  None of the above - my client is involved in an Involuntary Commitment, Emancipation, or a rare case not listed above
+		Q(3.1.6):GOTO:5
+A: 2
+	Q(3.2):GOTO:3.1
+A: 3
+	Q(3.3):GOTO:3.1
+A: 4
+	Q(3.4):GOTO:3.1
+A: 5
+	Q(3.5):GOTO:3.1
+A: 6
+	Q(3.6):GOTO:3.1
+A: 7
+	Q(3.7):GOTO:3.1
+A: 8
+	Q(3.8):GOTO:3.1
+A: 9+
+	Q(3.9):GOTO:3.1
+
+Q(4):  <b> Fourth, </b> does your client or member of the family unit have any large monthly payments (e.g. car payments or similar items) that can be converted into cash?
+A: No.
+	Q(4.1):GOTO:5
+A: Yes.
+	Q(4.2):  Ok, these monthly payments may need to be converted into cash and included as a cash asset.  After accounting for these payments as a cash asset, are the cash assets equal to or greater than the amount shown for the most serious charge your client is facing? <img src="https://i.imgur.com/DdxFInT.png">?  
+	A:  Yes.
+		Q(4.2.1):GOTO:EndCash
+	A:  No.
+		Q(4.2.2):GOTO:5
+Q(5): <b> Fifth, </b> including cash assets, it the client's <b> <i> Gross Annual Income </b> </i> less than the amount show in this chart? <img src="https://i.imgur.com/SOWuy6m.png">
+A:  No; the total income of my client and family members combined is <b><u> OVER the applicable amount shown </b></u>.
+	Q(5.1):GOTO:EndIncome
+A:  Yes, the total income of my client and family members combined is <b><u>BELOW the applicable amount shown</b></u>.
+	Q(5.2):  Ok, then based on your answers, your client is <b><u> ELIGIBLE </b></u> for a state appointed attorney.  
+Now lets determine if your client will need to reimburse the state.  Is your client's monthly income below necessary expenses <img src="https://i.imgur.com/b89fVAg.png">
+	A: Yes - monthly expenses are greater than monthly income
+		Q(5.2.1):  Your client does NOT need to reimburse the state for any expenses.  Thank you for using this service!
+	A: No - monthly income is greater than monthly expenses
+		Q(5.2.2):  Your client DOES need to reimburse the state.  The MAX reimbursement amount is located in this table. <img src="https://i.imgur.com/0C7LD8b.png">
+		A:  Ok
+			Q(5.2.2.1):GOTO:EndEli
+
+Q(EndEli): Based on your answers, your client is ELIGIBLE for a state appointed attorney but needs to reimburse the state.  If you have any questions please reach out.
+
+Q(End):  Ok, if you do need help please contact our office at any time!
+Q(Civil):  Unfortunately state appointed attorneys are not available for civil cases.  There are a few other types of cases that are eligible for a state appointed attorney, but those cases are rare.  Please contact our firm if you think you may have a rare case!
+Q(EndCash):  Unfortunately your client is ineligble for a state appointed attorney because the family unit's cash assets are too great.  Please contact our firm if you have any further questions!
+Q(EndIncome):  Unfortunately your client is ineligible for a state appointed attorney because their income is too great.  BUT if there are extraordinary necessary monthly expenses, then your client my be eligible.  Please contact our firm if you have extraordinary necessary monthly expenses.
