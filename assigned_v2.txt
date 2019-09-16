@@ -40,12 +40,16 @@ A:None of the above - my client is involved in an Involuntary Commitment, Emanci
 	Q(4.6):GOTO:income
 
 Q(income): <b> Fourth, </b> including cash assets, please enter the total gross income of the client and the family unit.  Gross income is income before taxes.
-X[javascript:if (getvar('income')>getvar('3')*4862+8877){goto('EndIncome')} else if (getvar('income')<13739){goto('EndEli')}]:number
-Q(EndEli): Based on your answers, your client is ELIGIBLE for a state appointed attorney but may need to reimburse the state.  Now lets determine if your client will need to reimburse the state.  What is your client's monthly expenses
-
-
+X[javascript:if (getvar('income')>getvar('3')*4862+8877) {goto('EndIncome')} else if (getvar('income')<(getvar('3')*4862)+8877) {goto('EndEli')}]:number
+Q(EndEli): Based on your answers, your client is ELIGIBLE for a state appointed attorney but may need to reimburse the state.  Now lets determine if your client will need to reimburse the state.
+A: Ok let's continue!
+	Q(6.1):GOTO:month
+Q(month): Based on the chart below, what is your client's necessary monthly expenses? <img src="https://i.imgur.com/b89fVAg.png">
+X[javascript:if (getvar('month')>(getvar('income')/12)) {goto('nn1')} else if (getvar('month')<(getvar('income')/12)) {goto('nn2')}]:number
 Q(End):  Ok, if you do need help please contact our office at any time!
 Q(Civil):  Unfortunately state appointed attorneys are not available for civil cases.  There are a few other types of cases that are eligible for a state appointed attorney, but those cases are rare.  Please contact our firm if you think you may have a rare case!
 Q(EndCash):  Unfortunately your client is ineligble for a state appointed attorney because the family unit's cash assets are too great.  Please contact our firm if you have any further questions!
 Q(EndIncome):  Unfortunately your client is ineligible for a state appointed attorney because their income is too great.  BUT if there are extraordinary necessary monthly expenses, then your client my be eligible.  Please contact our firm if you have extraordinary necessary monthly expenses.
 Q(placeholder): Place holder
+Q(nn1):  Your client DOES NOT need to reimburse the state for your appointed counsel.
+Q(nn2): Your client DOES need to reimburse the state.  The MAX reimbursement amount is located in this table. <img src="https://i.imgur.com/0C7LD8b.png">
