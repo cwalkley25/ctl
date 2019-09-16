@@ -1,0 +1,51 @@
+Title: Maine Indigency Calculator
+Author: Christopher Walkley
+Before:<link rel="stylesheet" type="text/css" href="https://suffolklitlab.org/howto/qna/style/style.css">
+<div id="icon" style="background-size: 110px 99px;background-image: url('https://suffolklitlab.org/howto/qna/images/maxheadroom.gif');"></div>
+<h2 style="text-align:center;">Maine Indigency Calculator</h2>
+<p><b>This is a <a href="http://www.codingthelaw.org/">class project</a>. You should not rely on it as a source of legal information. It is likely incomplete.</b></p>
+<p>Answer the following questions to see if someone qualifies for appointment of counsel.</p>
+
+Q(1):  Hello!  If you are wondering if your client is eligible for state appointed counsel, I can provide you an answer in about 5 minutes!  To start, is your client in need of state appointed legal representation?
+A:  Yes.
+	Q(1.1):GOTO:2
+A:  No. 
+	Q(1.2):GOTO:End
+
+Q(2):  Is your client involved in a civil case, such as divorce, eviction, protection from abuse, small claims, or foreclosures?
+A:  Yes.
+	Q(2.1):GOTO:Civil
+A:  No - my client is involved in a criminal, juvenile, child protective, involuntary commitment, or emancipation case
+	Q(2.2):GOTO:3
+ 
+
+Q(3):  Ok, your client maybe eligible for a state appointed attorney.  Let's gather some information about your client to see if they are eligible.  <b> First, </b> how many members are in the client's family unit (e.g. if the client lives alone enter "1" and if the client lives with 2 other people enter "3")?
+X:number
+	Q(3.1): <b> Second </b>  what are the total cash assets of the client and members of the family unit (including any bail paid by the client or monthly car payments).  Please enter as a number without commas or other symbols.
+	X:number
+		Q(3.1.1):GOTO:4
+	A:  I'm not sure - what are considered <i> "cash assets" </i>
+		Q(3.1.2): Good question!  Cash assets include: cash on hand, money in savings, checking, IRA, or other readily accessible accounts; stocks of bonds that can be sold; and <b> cash bail paid by the client </b>
+		A: Click <b> HERE </b> to return to the previous question
+			Q(3.1.2.1):GOTO:3.1
+	
+
+Q(4):  <b> Third, </b> what is the most serious charge facing your client?
+A[javascript:if (getvar('3.1')>'3999.999') {goto('EndCash')} else if (getvar('3.1')<'4000') {goto('income')}]: Class A felony
+A[javascript:if (getvar('3.1')>'2999.999') {goto('EndCash')} else if (getvar('3.1')<'3000') {goto('income')}]: Class B felony
+A[javascript:if (getvar('3.1')>'1999.999') {goto('EndCash')} else if (getvar('3.1')<'2000') {goto('income')}]: Class C felony
+A[javascript:if (getvar('3.1')>'999.999') {goto('EndCash')} else if (getvar('3.1')<'1000') {goto('income')}]: Class D or E or misdemeanor
+A[javascript:if (getvar('3.1')>'2499.999') {goto('EndCash')} else if (getvar('3.1')<'2500') {goto('income')}]: My client is in a Protective Custody case
+A:None of the above - my client is involved in an Involuntary Commitment, Emancipation, or a rare case not listed above
+	Q(4.6):GOTO:income
+
+Q(income): <b> Fourth, </b> including cash assets, please enter the total gross income of the client and the family unit.  Gross income is income before taxes.
+X[javascript:if (getvar('income')>getvar('3')*4862+8877){goto('EndIncome')} else if (getvar('income')<13739){goto('EndEli')}]:number
+Q(EndEli): Based on your answers, your client is ELIGIBLE for a state appointed attorney but may need to reimburse the state.  Now lets determine if your client will need to reimburse the state.  What is your client's monthly expenses
+
+
+Q(End):  Ok, if you do need help please contact our office at any time!
+Q(Civil):  Unfortunately state appointed attorneys are not available for civil cases.  There are a few other types of cases that are eligible for a state appointed attorney, but those cases are rare.  Please contact our firm if you think you may have a rare case!
+Q(EndCash):  Unfortunately your client is ineligble for a state appointed attorney because the family unit's cash assets are too great.  Please contact our firm if you have any further questions!
+Q(EndIncome):  Unfortunately your client is ineligible for a state appointed attorney because their income is too great.  BUT if there are extraordinary necessary monthly expenses, then your client my be eligible.  Please contact our firm if you have extraordinary necessary monthly expenses.
+Q(placeholder): Place holder
