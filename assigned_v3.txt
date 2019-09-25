@@ -1,0 +1,66 @@
+Title: Maine Indigency Calculator
+Author: Christopher Walkley
+Before: 
+<link rel="stylesheet" type="text/css" href="https://suffolklitlab.org/howto/qna/style/style.css">
+<div id="icon" style="background-size: 110px 99px;background-image: url('https://suffolklitlab.org/howto/qna/images/maxheadroom.gif');"></div>
+<h2 style="text-align:center;">Maine Indigency Calculator</h2>
+<p><b>This is a <a href="http://www.codingthelaw.org/">class project</a>. You should not rely on it as a source of legal information. It is likely incomplete.</b></p>
+<p>Answer the following questions to see if someone qualifies for appointment of counsel.</p>
+
+
+Q(1):  Hello!  If you are wondering if your client is eligible for state appointed counsel, I can provide you an answer in about 5 minutes!  To start, is your client in need of state appointed legal representation?
+A:  Yes.
+	Q(1.1):GOTO:2
+A:  No. 
+	Q(1.2):GOTO:End
+
+Q(2):  Is your client involved in a civil case, such as divorce, eviction, protection from abuse, small claims, or foreclosures?
+A:  Yes.
+	Q(2.1):GOTO:Civil
+A:  No - my client is involved in a criminal, juvenile, child protective, involuntary commitment, or emancipation case
+	Q(2.2):GOTO:fam
+ 
+
+Q(fam):  Ok, your client maybe eligible for a state appointed attorney.  Let's gather some information about your client to see if they are eligible.  <b> First, </b> how many members are in the client's family unit (e.g. if the client lives alone enter "1" and if the client lives with 2 other people enter "3")?
+X:number
+	Q(cash): <b> Second </b>  what are the total cash assets of the client and the members of the family unit (including any bail paid by the client or monthly car payments).  Please enter as a number without commas or other symbols.
+	X:number
+		Q(3.1.1):GOTO:charge
+	A:  I'm not sure - what are considered <i> "cash assets" </i>
+		Q(3.1.2): Good question!  Cash assets include: cash on hand, money in savings, checking, IRA, or other readily accessible accounts; stocks of bonds that can be sold; and <b> cash bail paid by the client </b>
+		A: Click <b> HERE </b> to return to the previous question
+			Q(3.1.2.1):GOTO:cash
+	
+
+Q(charge):  <b> Third, </b> what is the most serious charge facing your client?
+A[javascript:if (getvar('cash')>3999.999) {goto('EndCash')} else if (getvar('cash')<4000) {goto('income')}]: Class A felony
+A[javascript:if (getvar('cash')>2999.999) {goto('EndCash')} else if (getvar('cash')<3000) {goto('income')}]: Class B felony
+A[javascript:if (getvar('cash')>1999.999) {goto('EndCash')} else if (getvar('cash')<2000) {goto('income')}]: Class C felony
+A[javascript:if (getvar('cash')>999.999) {goto('EndCash')} else if (getvar('cash')<1000) {goto('income')}]: Class D or E or misdemeanor
+A[javascript:if (getvar('cash')>2499.999) {goto('EndCash')} else if (getvar('cash')<2500) {goto('income')}]: My client is in a Protective Custody case
+A:None of the above - my client is involved in an Involuntary Commitment, Emancipation, or a rare case not listed above
+	Q(4.6):GOTO:income
+
+Q(income): <b> Fourth, </b> including cash assets, please enter the total gross income of the client and the family unit.  Gross income is income before taxes.
+X[javascript:if (getvar('income')>getvar('fam')*4862+8877) {goto('EndIncome')} else if (getvar('income')<(getvar('fam')*4862)+8877) {goto('EndEli')}]:number
+Q(EndEli): Based on your answers, your client is ELIGIBLE for a state appointed attorney but may need to reimburse the state.  Now lets determine if your client will need to reimburse the state.
+A: Ok let's continue!
+	Q(6.1):GOTO:month
+Q(month): Based on the chart below, what is your client's necessary monthly expenses? <img src="https://i.imgur.com/b89fVAg.png">
+X[javascript:if (getvar('month')>(getvar('income')/12)) {goto('nn1')} else if (getvar('month')<(getvar('income')/12)) {goto('nn2')}]:number
+Q(End):  Ok, if you do need help please contact our office at any time!
+Q(Civil):  Unfortunately state appointed attorneys are not available for civil cases.  There are a few other types of cases that are eligible for a state appointed attorney, but those cases are rare.  Please contact our firm if you think you may have a rare case!
+Q(EndCash):<input type="hidden" name="name" value="Ineligible Recap Cash"/><input type="hidden" name="docx_uri" value="https://cwalkley25.github.io/ctl/clientreject.docx"/>  Unfortunately your client is ineligble for a state appointed attorney because the family unit's cash assets are too great.  Please contact our firm if you have any further questions!
+A[javascript:submit2('https://colarusso.pythonanywhere.com/2docx/', 'POST', '', '', '', 'json_doc', '_blank')]:  Click <b> HERE </b> to get a recap of why we determined that you were ineligible and for your next steps.
+Q(EndIncome):<input type="hidden" name="name" value="Ineligible Recap Income"/><input type="hidden" name="docx_uri" value="https://cwalkley25.github.io/ctl/clientreject2.docx"/>  Unfortunately your client is ineligible for a state appointed attorney because their income is too great.  BUT if there are extraordinary necessary monthly expenses, then your client my be eligible.  Please contact our firm if you have extraordinary necessary monthly expenses.
+A[javascript:submit2('https://colarusso.pythonanywhere.com/2docx/', 'POST', '', '', '', 'json_doc', '_blank')]:  Click <b> HERE </b> to get a recap of why we determined that you were ineligible and for your next steps.
+Q(placeholder): Place holder
+Q(nn1):  Your client DOES NOT need to reimburse the state for your appointed counsel.
+A: Ok, what next?
+	Q(13.1):GOTO:Print
+Q(nn2): Your client DOES need to reimburse the state.  The MAX reimbursement amount is located in this table. <img src="https://i.imgur.com/0C7LD8b.png">
+A: Ok, what next?
+	Q(14.1):GOTO:Print
+Q(Print):<input type="hidden" name="name" value="Recap and Next Steps"/><input type="hidden" name="docx_uri" value="https://cwalkley25.github.io/ctl/clientletter2.docx"/> Ok, now if you would like to print out this information and receive instructions on how to file for an attorney please click below
+A[javascript:submit2('https://colarusso.pythonanywhere.com/2docx/', 'POST', '', '', '', 'json_doc', '_blank')]:Yes, please I want the information in a docx!
+
